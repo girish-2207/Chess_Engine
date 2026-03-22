@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>♟ Chess Engine</h1>
+
+<!-- ============================================================
+     Startup Dialog — choose color AND rating before game starts
+     ============================================================ -->
+<div id="dlg-color">
+    <div class="dbox">
+        <h2>New Game</h2>
+        <p>Choose your color and engine strength</p>
+
+        <!-- Color selection -->
+        <div class="rating-label">Play as</div>
+        <div class="cbtns">
+            <button class="cbtn" data-color="white" onclick="selectColor('white')">
+                <span class="ico">♔</span>White
+            </button>
+            <button class="cbtn" data-color="black" onclick="selectColor('black')">
+                <span class="ico">♚</span>Black
+            </button>
+        </div>
+
+        <!-- Rating selection -->
+        <div class="rating-label">Engine Strength</div>
+        <div class="rbtns">
+            <button class="rbtn" data-rating="1000" onclick="selectRating(1000)">
+                <span class="elo">1000</span>
+                <span class="desc">Beginner</span>
+            </button>
+            <button class="rbtn" data-rating="1400" onclick="selectRating(1400)">
+                <span class="elo">1400</span>
+                <span class="desc">Intermediate</span>
+            </button>
+        </div>
+
+        <!-- Start button (disabled until both selected) -->
+        <button id="btn-start" onclick="startGame()" disabled>Start Game</button>
+    </div>
+</div>
+
+<!-- ============================================================
+     Main Game
+     ============================================================ -->
+<div id="game">
+
+    <!-- Board -->
+    <div id="board-area">
+        <div id="board-wrap">
+            <div id="ranks"></div>
+            <div id="board-col">
+                <canvas id="chess-board"></canvas>
+                <div id="files"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div id="panel">
+
+        <!-- Status -->
+        <div id="status-bar">
+            <div id="status">Your turn</div>
+        </div>
+
+        <!-- Engine info (shown after game starts) -->
+        <div id="engine-info">
+            <div class="ei-label">Engine</div>
+            <div class="ei-elo" id="ei-elo">—</div>
+            <div class="ei-desc" id="ei-desc"></div>
+        </div>
+
+        <!-- Move notation -->
+        <div id="notation-wrap">
+            <h3>Moves</h3>
+            <div id="moves-list"></div>
+        </div>
+
+        <!-- Controls -->
+        <div id="ctrl-btns">
+            <button class="ctrl resign" id="btn-resign" onclick="handleResign()">⚑ Resign</button>
+            <button class="ctrl" id="btn-undo" onclick="handleUndo()" disabled>↩ Undo</button>
+            <button class="ctrl" id="btn-redo" onclick="handleRedo()" disabled>↪ Redo</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================
+     Result Dialog
+     ============================================================ -->
+<div id="dlg-result">
+    <div class="rbox">
+        <span class="rico" id="r-icon"></span>
+        <h2 id="r-title"></h2>
+        <p  id="r-sub"></p>
+        <button onclick="newGame()">Play Again</button>
+    </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
